@@ -52,6 +52,7 @@ Auth.get(
   (req, res) => {
     res.cookie('loggedIn', 'true');
     res.cookie('username', req.user.displayName); 
+    res.cookie('email', req.user.emails?.[0]?.value || '');
     res.redirect(`${frontendUrl}/`);
   }
 );

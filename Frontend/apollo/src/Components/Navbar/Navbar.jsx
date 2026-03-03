@@ -23,6 +23,7 @@ function Navbar() {
         Cookies.remove('loggedIn', { path: '/' });
         Cookies.remove('username', { path: '/' });
         Cookies.remove('token',{path:'/'});
+        Cookies.remove('email',{path:'/'});
         setIsLoggedIn(false);
       }
     } catch (error) {

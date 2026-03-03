@@ -72,6 +72,7 @@ function LoginForm() {
         Cookies.set("token", token);
         Cookies.set("loggedIn", "true");
         Cookies.set("username", loginUser.username);
+        Cookies.set("email", loginUser.email);
         
         window.location.href = "/";
         window.alert("Login successful");
