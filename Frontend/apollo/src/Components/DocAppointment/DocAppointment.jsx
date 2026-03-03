@@ -37,7 +37,7 @@ function DocAppointment() {
           return;
         }
 
-  const response = await axios.get(`${import.meta.env.VITE_API_URL}/departments/${departmentName.toLowerCase()}`);
+  const response = await axios.get(`${import.meta.env.VITE_API_URL}/departments/${departmentName}`);
         const doctors = response.data;
 
         // Find the doctor with the matching doctorId
