@@ -90,6 +90,7 @@ userRoute.post("/login", async (req, res) => {
         
         res.cookie('token', token, { httpOnly: true }); 
         res.cookie('loggedIn', true, { httpOnly: false }); 
+        res.cookie('email', user.email, { httpOnly: false });
         res.status(200).send({ msg: "Logged in successfully.", token: token });
     } catch (error) {
         res.status(500).send({ error: "Internal server error" });
@@ -101,6 +102,7 @@ userRoute.post("/logout", async (req, res) => {
         res.clearCookie("token");
         res.clearCookie('loggedIn');
         res.clearCookie("username");
+        res.clearCookie("email");
         res.status(200).send("Logged out successfully");
     } catch (error) {
         res.status(500).send({ error: "Internal server error" });
