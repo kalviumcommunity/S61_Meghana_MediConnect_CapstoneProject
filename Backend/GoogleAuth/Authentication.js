@@ -13,6 +13,7 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: `${backendUrl}/auth/google/callback`,
+      scope: ["profile", "email"],
     },
     (accessToken, refreshToken, profile, done) => {
       return done(null, profile);
@@ -46,6 +47,15 @@ Auth.get(
 
 Auth.get(
   "/auth/google/callback",
+  (req, res, next) => {
+    if (!req.query.code && !req.query.error) {
+      return passport.authenticate("google", {
+        scope: ["profile", "email"],
+        prompt: "select_account",
+      })(req, res, next);
+    }
+    return next();
+  },
   passport.authenticate("google", {
     failureRedirect: `${frontendUrl}/login`,
   }),
