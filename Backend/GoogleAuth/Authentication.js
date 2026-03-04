@@ -4,7 +4,6 @@ const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 const Auth = express.Router();
-const backendUrl = process.env.BACKEND_URL || "http://localhost:3000";
 const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
 
 passport.use(
@@ -12,7 +11,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `${backendUrl}/auth/google/callback`,
+      callbackURL: process.env.GOOGLE_CALLBACK_URL || "/auth/google/callback",
       scope: ["profile", "email"],
     },
     (accessToken, refreshToken, profile, done) => {
